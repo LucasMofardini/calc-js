@@ -1,12 +1,13 @@
 const input = document.querySelector('#input-form');
 const btnsNumericos = document.querySelectorAll('.clicavel');
 const btnResult = document.querySelector('#result-form');
+const btnClear = document.querySelector('#btn-clear');
+const btnC = document.querySelector('#btn-c');
 
 export const setaNoInput = (item) =>{
     let ultimoCaractere = input.value.substr(-1);
-
-    if(ultimoCaractere == '+' || ultimoCaractere == '-' || ultimoCaractere == '*' || ultimoCaractere == '/'){
-        if(item.name == '+' || item.name == '-' || item.name == '*' || item.name == '/'){
+    if(ultimoCaractere == '+' || ultimoCaractere == '-' || ultimoCaractere == '*' || ultimoCaractere == '/' ){
+        if(item.name == '+' || item.name == '-' || item.name == '*' || item.name == '/' ){
             return
         }
         return input.value = input.value + item.name.toString();
@@ -16,7 +17,7 @@ export const setaNoInput = (item) =>{
 
 const mostraResultado = () => {
     const resultado = eval(input.value);
-    input.value = resultado;
+    if(resultado) input.value = eval(input.value); 
 }
 
 btnsNumericos.forEach((item)=>{
@@ -25,6 +26,13 @@ btnsNumericos.forEach((item)=>{
 })
 });
  
-btnResult.addEventListener('click',()=>{
+btnResult.addEventListener('click',() => {
      mostraResultado();
+})
+
+btnClear.addEventListener('click', () =>{
+    input.value = '';
+})
+btnC.addEventListener('click', () => {
+    input.value = input.value.slice(0,-1);
 })
